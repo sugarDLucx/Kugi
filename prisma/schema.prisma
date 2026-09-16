@@ -1,0 +1,127 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  BUYER
+  FREELANCER
+  ADMIN
+  MEDIATOR
+}
+
+enum ClusterZone {
+  CLUSTER_1_TAGUM
+  CLUSTER_2_KAPALONG_ASUNCION
+  CLUSTER_3_PANABO_CORRIDOR
+  CLUSTER_4_SAMAL_ISLAND
+}
+
+enum VerificationTier {
+  TIER_0_UNVERIFIED
+  TIER_1_PHILSYS_VERIFIED
+  TIER_2_PRC_BIR_AUDITED
+  TIER_3_PORTFOLIO_CERTIFIED
+}
+
+enum MilestoneStatus {
+  PENDING_DEPOSIT
+  ESCROW_LOCKED
+  IN_PROGRESS
+  UNDER_INSPECTION
+  REVISION_REQUESTED
+  DISPUTED
+  FUNDS_RELEASED
+  REFUNDED
+}
+
+model User {
+  id               String           @id @default(cuid())
+  email            String           @unique
+  phoneNumber      String           @unique
+  passwordHash     String
+  fullName         String
+  avatarUrl        String?
+  activeRole       Role             @default(FREELANCER)
+  cluster          ClusterZone
+  municipality     String
+  barangay         String
+  verification     VerificationTier @default(TIER_0_UNVERIFIED)
+  prcLicenseNo     String?
+  tinNumber        String?
+  isBir2303Valid   Boolean          @default(false)
+  gcashWallet      String?
+  contractsAsBuyer Contract[]       @relation("BuyerContracts")
+  contractsAsPro   Contract[]       @relation("ProContracts")
+  reviewsWritten   Review[]         @relation("EvaluatorReviews")
+  reviewsReceived  Review[]         @relation("SubjectReviews")
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+}
+
+model Contract {
+  id              String           @id @default(cuid())
+  orderNumber     String           @unique // e.g., "KG-90241"
+  title           String
+  description     String
+  category        String
+  buyerId         String
+  freelancerId    String
+  buyer           User             @relation("BuyerContracts", fields: [buyerId], references: [id])
+  freelancer      User             @relation("ProContracts", fields: [freelancerId], references: [id])
+  totalAmount     Decimal          @db.Decimal(12, 2)
+  milestones      Milestone[]
+  disputes        Dispute[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Milestone {
+  id              String           @id @default(cuid())
+  contractId      String
+  contract        Contract         @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  sequenceOrder   Int              @default(1)
+  title           String
+  description     String
+  escrowDeposit   Decimal          @db.Decimal(12, 2)
+  withholdingTax  Decimal          @default(0.00) @db.Decimal(12, 2)
+  platformFee     Decimal          @default(0.00) @db.Decimal(12, 2)
+  netDisbursement Decimal          @db.Decimal(12, 2)
+  status          MilestoneStatus  @default(PENDING_DEPOSIT)
+  deliverableUrl  String?
+  deliverableHash String?          // SHA-256 Checksum
+  inspectionEndAt DateTime?
+  approvedAt      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Dispute {
+  id              String           @id @default(cuid())
+  contractId      String
+  contract        Contract         @relation(fields: [contractId], references: [id])
+  reason          String
+  status          String           @default("OPEN")
+  resolutionNotes String?
+  createdAt       DateTime         @default(now())
+}
+
+model Review {
+  id              String           @id @default(cuid())
+  contractId      String
+  evaluatorId     String
+  subjectId       String
+  evaluator       User             @relation("EvaluatorReviews", fields: [evaluatorId], references: [id])
+  subject         User             @relation("SubjectReviews", fields: [subjectId], references: [id])
+  ratingQuality   Int              // 1 to 5
+  ratingTimeline  Int              // 1 to 5
+  ratingComms     Int              // 1 to 5
+  ratingIntegrity Int              // 1 to 5
+  feedbackText    String
+  isRevealed      Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+}

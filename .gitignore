@@ -1,0 +1,46 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/cache
+
+# Build outputs
+/.next/
+/out/
+/build
+/dist
+
+# Testing & Coverage
+/coverage
+
+# Environment variables
+.env*.local
+.env
+
+# Logs and debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+*.tsbuildinfo
+next-env.d.ts
+
+# Mobile wrappers
+/android
+/ios
+
+# Documents and files used to build the application (User Requested)
+/UI Components/
+*.docx
+*.txt
+Davao del Norte Economic Profile.md
+Kugi UI Prompts for Stitch.md
+Antigravity Implementation Guide for Kugi.md
+KugiApp Master Development Prompt & Technical Blueprint.md
+PROMPT.md
+/.antigravity/
+/docs/
+
+# System / OS
+.DS_Store
+Thumbs.db
