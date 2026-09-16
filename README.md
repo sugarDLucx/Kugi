@@ -4,11 +4,12 @@
 > *Localized High-Trust Escrow Marketplace & Enterprise Contracting Infrastructure for Davao del Norte, Region XI, Philippines.*
 
 [![Next.js 15](https://img.shields.io/badge/Next.js-15.5.25-black?style=flat&logo=next.js)](https://nextjs.org/)
-[![React 19](https://img.shields.io/badge/React-19.0.0-61DAFB?style=flat&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
-[![Prisma](https://img.shields.io/badge/Prisma-6.4-2D3748?style=flat&logo=prisma)](https://www.prisma.io/)
-[![Capacitor](https://img.shields.io/badge/Capacitor-7.0-119EFF?style=flat&logo=ionic)](https://capacitorjs.com/)
+[![React 19](https://img.shields.io/badge/React-19.3.0-61DAFB?style=flat&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.19-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.19.3-2D3748?style=flat&logo=prisma)](https://www.prisma.io/)
+[![Capacitor](https://img.shields.io/badge/Capacitor-7.6.9-119EFF?style=flat&logo=ionic)](https://capacitorjs.com/)
+[![Zustand](https://img.shields.io/badge/Zustand-5.0.15-brown?style=flat)](https://zustand-demo.pmnd.rs/)
 [![Compliance](https://img.shields.io/badge/Compliance-RA_11967_|_BIR_RR_16--2023-10B981?style=flat)]()
 
 ---
@@ -62,15 +63,25 @@ All talent, contracts, listings, and searches are natively partitioned across th
 
 ---
 
-## 📱 Tech Stack & Architecture
+## 📱 Verified Technical Stack & Ecosystem
 
-- **Web Framework:** Next.js 15 (React 19, App Router, Server Actions, Route Handlers)
-- **Styling:** Tailwind CSS 3.4 with custom design tokens + Material Symbols + Lucide React
-- **Client State:** Zustand 5 (dual-role Buyer/Freelancer mode toggle, 4-cluster filtration)
-- **Mobile Container:** Capacitor 7 (packaged for Android APK and iOS binaries)
-- **Database & ORM:** PostgreSQL with Prisma 6 (ACID-compliant transactions for milestone vaults)
-- **Offline / Local Dev:** Integrated fallback mock data store across all 4 DavNor clusters
-- **Security & Integrity:** Regex disintermediation shield, SHA-256 deliverable watermarking
+Every dependency in the repository is audited and locked to LTS-compatible, production-grade releases:
+
+| Component / Layer | Technology | Exact Version Installed | Architectural Role & Implementation in Kugi |
+| :--- | :--- | :--- | :--- |
+| **Runtime Environment** | Node.js | `v24.16.0` LTS | Core JavaScript execution runtime with active LTS support |
+| **Package Manager** | npm | `11.13.0` | Deterministic dependency tree resolution with `package-lock.json` |
+| **Web Framework** | Next.js (App Router) | `15.5.25` | Hybrid SSR, static generation, Route Handlers, and Server Actions |
+| **UI Library** | React | `19.3.0` | Concurrent rendering engine powering all 13 interactive screens |
+| **Type Safety** | TypeScript | `5.9.3` | Strict type checking across state machines, props, and schemas |
+| **Styling Engine** | Tailwind CSS | `3.4.19` | Utility CSS configured with custom institutional tokens in `tailwind.config.ts` |
+| **Post-Processor** | PostCSS / Autoprefixer | `8.5.28` / `10.6.1` | Cross-browser vendor prefixing and CSS minification |
+| **State Management** | Zustand | `5.0.15` | Global client store managing Dual-Role switcher and active cluster |
+| **Mobile Runtime Bridge**| Capacitor Core & CLI | `7.6.9` | Native wrapper bridging Next.js to Android APK and iOS with biometrics |
+| **ORM & Data Layer** | Prisma Client & CLI | `6.19.3` | Type-safe query engine and relational migration tooling (`schema.prisma`) |
+| **Iconography** | Lucide React | `0.475.0` | Lightweight SVG icons for navigation, trust badges, and payment rails |
+| **CSS Utilities** | clsx & tailwind-merge | `2.1.1` / `3.7.0` | Conditional class resolution and conflict avoidance |
+| **Typography** | Google Fonts | Web (Next/Font) | Plus Jakarta Sans (UI) & JetBrains Mono (Financials & SHA-256) |
 
 ---
 
