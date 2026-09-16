@@ -155,8 +155,7 @@ npm run build
 │   ├── avatar.png                        # Verified profile headshot
 │   └── manifest.json                     # PWA Web App Manifest
 ├── capacitor.config.ts                   # Mobile wrapper configuration
-├── tailwind.config.ts
-└── INSTRUCTIONS.md                       # Comprehensive setup and escrow operational guide
+└── tailwind.config.ts
 ```
 
 ---
